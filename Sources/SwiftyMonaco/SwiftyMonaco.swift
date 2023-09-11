@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 #if os(macOS)
 typealias ViewControllerRepresentable = NSViewControllerRepresentable
 #else
@@ -14,23 +14,37 @@ typealias ViewControllerRepresentable = UIViewControllerRepresentable
 #endif
 
 public struct SwiftyMonaco: ViewControllerRepresentable, MonacoViewControllerDelegate {
+    public var global_suggestions: [MonacoSuggestion] = []
     
+
     var text: Binding<String>
     private var syntax: SyntaxHighlight?
     private var _minimap: Bool = true
     private var _scrollbar: Bool = true
     private var _smoothCursor: Bool = false
     private var _cursorBlink: CursorBlink = .blink
-    private var _fontSize: Int = 12
+    private var _fontSize: Int = 14
+    private let data: MonacoDataModel
+//    var gsuggestions: Binding<[MonacoSuggestion]>
+//    
+//    private var text_subscriptions: Set<AnyCancellable> = .init()
+//    
+//    public var global_suggestions: [MonacoSuggestion] {
+//        
+//        return gsuggestions.wrappedValue
+//    }
     
-    public init(text: Binding<String>) {
+    public init(text: Binding<String>, data: MonacoDataModel) {
         self.text = text
+        self.data = data
     }
     
     #if os(macOS)
     public func makeNSViewController(context: Context) -> MonacoViewController {
         let vc = MonacoViewController()
         vc.delegate = self
+        //vc.data_model = data
+        vc.webConfiguration = data.webConfiguration
         return vc
     }
     
