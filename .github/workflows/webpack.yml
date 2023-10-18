@@ -23,6 +23,6 @@ jobs:
 
     - name: Build
       run: |
-        cd web/src
+        cd web
         npm install
         npx webpack
