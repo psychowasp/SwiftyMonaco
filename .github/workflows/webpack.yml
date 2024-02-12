@@ -25,7 +25,9 @@ jobs:
       run: |
         cd web
         npm install
-        npx webpack
+        #npx webpack
+        npm run build
+        
 
 
 
