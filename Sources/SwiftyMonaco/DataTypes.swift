@@ -59,10 +59,10 @@ public struct IMarkdownString: Encodable, ExpressibleByStringLiteral {
 
 
 public struct MonacoSuggestion: Encodable {
-    var label: String
+    public var label: String
     var kind: MonacoEditorTypes
     var documentation: IMarkdownString
-    var insertText: String
+    public var insertText: String
     var detail: String
     var insertTextRules: Int?
     

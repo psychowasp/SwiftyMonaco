@@ -25,6 +25,9 @@ public struct SwiftyMonaco: ViewControllerRepresentable, MonacoViewControllerDel
     private var _cursorBlink: CursorBlink = .blink
     private var _fontSize: Int = 14
     private let data: MonacoDataModel
+	#if os(macOS)
+	@State private var window: NSWindow?
+	#endif
 //    var gsuggestions: Binding<[MonacoSuggestion]>
 //    
 //    private var text_subscriptions: Set<AnyCancellable> = .init()
@@ -45,10 +48,16 @@ public struct SwiftyMonaco: ViewControllerRepresentable, MonacoViewControllerDel
         vc.delegate = self
         //vc.data_model = data
         vc.webConfiguration = data.webConfiguration
+//		DispatchQueue.main.async {
+//			window = vc.view.window
+//		}
+		
         return vc
     }
     
+	
     public func updateNSViewController(_ nsViewController: MonacoViewController, context: Context) {
+		
     }
     #endif
     
