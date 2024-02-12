@@ -26,3 +26,21 @@ jobs:
         cd web
         npm install
         npx webpack
+
+
+
+    # commit new package to kivyswiftlink/master
+    - name: commit to master
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.TOKEN }}
+      with:
+        source-directory: './'
+        destination-github-username: 'psychowasp'
+        destination-repository-name: 'SwiftyMonaco'
+        user-email: pythonswiftlink@gmail.com
+        target-branch: master
+
+
+
+        
